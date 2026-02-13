@@ -22,26 +22,32 @@
 
 ---
 
+![Advanced AI Studio Banner](frontend/assets/qubrid_banner.png)
+
+# Advanced AI Image Creation Studio 🌌
+
+---
+
 ## 📸 Studio Gallery
 
 ### 🚀 Professional Landing Page
-<img src="https://raw.githubusercontent.com/aryadoshii-qubrid/advanced-ai-image-creation/main/frontend/assets/ss-landing.png" alt="Studio Landing" width="1000"/>
+<img src="frontend/assets/ss-landing.png" alt="Studio Landing" width="1000"/>
 
-*A distraction-free entry point featuring a centered search bar and curated style templates to jumpstart your creativity.*
-
----
-
-### 🎨 Creative Workspace & Prompting
-<img src="https://raw.githubusercontent.com/aryadoshii-qubrid/advanced-ai-image-creation/main/frontend/assets/ss-workspace.png" alt="Studio Workspace" width="1000"/>
-
-*Generate multiple variations in the dedicated workspace. Features real-time progress tracking and automated prompt enhancement.*
+*A distraction-free entry point featuring a sleek, ChatGPT-style centered search bar and curated style templates. The interface is optimized for high-performance creative workflows.*
 
 ---
 
-### 👾 Diverse Style Execution
-<img src="https://raw.githubusercontent.com/aryadoshii-qubrid/advanced-ai-image-creation/main/frontend/assets/ss-styles.png" alt="Multi-Style Results" width="1000"/>
+### 🎨 Creative Workspace & Progress Tracking
+<img src="frontend/assets/ss-workspace.png" alt="Studio Workspace" width="1000"/>
 
-*From neon-soaked Cyberpunk cities to intricate Isometric 3D game assets—experience unparalleled model adherence.*
+*Monitor your creation in real-time with our transparent "Quantum Rendering" status. This view keeps the glass UI vibrant without dimming the background lights during processing.*
+
+---
+
+### 👾 High-Fidelity Asset Generation
+<img src="frontend/assets/ss-generation.png" alt="Multi-Style Results" width="1000"/>
+
+*Experience superior model adherence with Stable Diffusion 3.5. Instantly download your high-resolution masterpieces directly from the studio workspace using the integrated asset manager.*
 
 ---
 
