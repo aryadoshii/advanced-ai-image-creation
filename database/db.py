@@ -1,67 +1,69 @@
 import sqlite3
-import uuid
-from datetime import datetime
-from config.settings import DB_PATH
+import os
+
+DB_PATH = "assets.db"
+
+# NO "from database.db import ..." HERE!
 
 def init_db():
-    """Initializes the SQLite database tables."""
+    """Initializes the database and creates tables."""
     conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS sessions (
-            id TEXT PRIMARY KEY,
-            title TEXT,
-            created_at TIMESTAMP
-        )
-    ''')
-    
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS messages (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            session_id TEXT,
-            role TEXT,
-            content TEXT,
-            image_url TEXT,
-            timestamp TIMESTAMP,
-            FOREIGN KEY(session_id) REFERENCES sessions(id)
-        )
-    ''')
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS sessions (id TEXT PRIMARY KEY, title TEXT)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS messages (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                        session_id TEXT, role TEXT, content TEXT, image_url TEXT)''')
     conn.commit()
     conn.close()
 
-def create_session(title: str) -> str:
-    """Creates a new chat session."""
+def delete_session(session_id):
+    """Permanently removes a session and its associated messages."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM messages WHERE session_id = ?", (session_id,))
+    cursor.execute("DELETE FROM sessions WHERE id = ?", (session_id,))
+    conn.commit()
+    conn.close()
+
+def create_session(title):
+    """Creates a new session and returns the ID."""
+    import uuid
     session_id = str(uuid.uuid4())
     conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("INSERT INTO sessions (id, title, created_at) VALUES (?, ?, ?)", 
-              (session_id, title, datetime.now()))
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO sessions (id, title) VALUES (?, ?)", (session_id, title))
     conn.commit()
     conn.close()
     return session_id
 
-def add_message(session_id: str, role: str, content: str, image_url: str = None):
-    """Saves a message (and optional image URL) to the DB."""
+def get_sessions():
+    """Retrieves all sessions, ensuring the latest appears at the top."""
     conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("INSERT INTO messages (session_id, role, content, image_url, timestamp) VALUES (?, ?, ?, ?, ?)",
-              (session_id, role, content, image_url, datetime.now()))
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    
+    # Use 'rowid DESC' to get the most recently inserted items first
+    cursor.execute("SELECT * FROM sessions ORDER BY rowid DESC")
+    
+    sessions = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return sessions
+
+def get_history(session_id):
+    """Retrieves message history for a specific session."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+    cursor.execute("SELECT role, content, image_url FROM messages WHERE session_id = ?", (session_id,))
+    history = [dict(row) for row in cursor.fetchall()]
+    conn.close()
+    return history
+
+def add_message(session_id, role, content, image_url=None):
+    """Adds a new message to the database."""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO messages (session_id, role, content, image_url) VALUES (?, ?, ?, ?)", 
+                   (session_id, role, content, image_url))
     conn.commit()
     conn.close()
-
-def get_sessions():
-    """Fetches all sessions, newest first."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    c.execute("SELECT * FROM sessions ORDER BY created_at DESC")
-    return c.fetchall()
-
-def get_history(session_id: str):
-    """Fetches full chat history for a session."""
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    c.execute("SELECT * FROM messages WHERE session_id = ? ORDER BY timestamp ASC", (session_id,))
-    return c.fetchall()
