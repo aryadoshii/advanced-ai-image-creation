@@ -1,4 +1,4 @@
-![Advanced AI Studio Banner](https://raw.githubusercontent.com/aryadoshii-qubrid/advanced-ai-image-creation/main/frontend/assets/banner.png)
+![Advanced AI Studio Banner](frontend/assets/qubrid_banner.png)
 
 # Advanced AI Image Creation Studio 🌌
 
@@ -19,12 +19,6 @@
 - **🔍 Intelligent Prompting** - Centered, search-engine style input for a clean, focused "Landing Page" experience.
 - **📂 Studio Workspace** - A dedicated creative environment with persistent history, image previews, and high-res downloads.
 - **📥 High-Res Exports** - Integrated base64-encoded download system for instant PNG asset acquisition.
-
----
-
-![Advanced AI Studio Banner](frontend/assets/qubrid_banner.png)
-
-# Advanced AI Image Creation Studio 🌌
 
 ---
 
@@ -71,6 +65,7 @@ advanced-ai-image-creation/
 │   └── db.py                 # SQLite operations for session persistence
 │
 └── frontend/
+│   ├── assets/               # Branding banner and UI screenshots
     ├── app.py                # Main UI & View Controller
     ├── sidebar.py            # History & Studio navigation
     └── styles.py             # Premium Glassmorphism CSS
@@ -104,13 +99,16 @@ advanced-ai-image-creation/
 ### Installation
 ```bash
 # 1. Clone the repository
-git clone [https://github.com/aryadoshii-qubrid/advanced-ai-image-creation.git](https://github.com/aryadoshii-qubrid/advanced-ai-image-creation.git)
+git clone https://github.com/aryadoshii-qubrid/advanced-ai-image-creation.git
 cd advanced-ai-image-creation
 
-# 2. Setup API Key
-echo "QUBRID_API_KEY=your_key_here" > .env
+# 2. Install dependencies (creates a virtual environment automatically)
+uv sync
 
-# 3. Install dependencies & Run
+# 3. Setup API Key
+echo "QUBRID_API_KEY=your_actual_key_here" > .env
+
+# 4. Run the Studio App
 uv run streamlit run frontend/app.py
 
 ```
