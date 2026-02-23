@@ -65,7 +65,7 @@ advanced-ai-image-creation/
 │   └── db.py                 # SQLite operations for session persistence
 │
 └── frontend/
-│   ├── assets/               # Branding banner and UI screenshots
+    ├── assets/               # Branding banner and UI screenshots
     ├── app.py                # Main UI & View Controller
     ├── sidebar.py            # History & Studio navigation
     └── styles.py             # Premium Glassmorphism CSS
