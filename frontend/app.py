@@ -12,15 +12,22 @@ from frontend.sidebar import render_sidebar
 from frontend.styles import get_css
 from backend.graph import build_graph
 from config.settings import API_KEY, GENERATED_IMAGES_DIR
+from PIL import Image
 
 # --- INITIALIZATION ---
 init_db()
 os.makedirs(GENERATED_IMAGES_DIR, exist_ok=True)
 
-# Qubrid Branding in Browser Tab
+# --- Qubrid Branding in Browser Tab ---
+# 1. Load the image from your local asset folder
+# Using a relative path makes it "portable" so it works on any computer
+logo_path = "frontend/assets/qubrid_logo.png"
+logo_image = Image.open(logo_path)
+
+# 2. Set the branding using the loaded image object
 st.set_page_config(
     page_title="Advanced AI Image Creation",
-    page_icon="https://www.qubrid.com/favicon.ico", 
+    page_icon=logo_image, # Pass the image object here, not the path string
     layout="wide",
     initial_sidebar_state="expanded"
 )
