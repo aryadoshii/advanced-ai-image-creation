@@ -102,13 +102,17 @@ advanced-ai-image-creation/
 git clone https://github.com/aryadoshii-qubrid/advanced-ai-image-creation.git
 cd advanced-ai-image-creation
 
-# 2. Install dependencies (creates a virtual environment automatically)
-uv sync
+# 2. Install UV package manager
+curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# 3. Setup API Key
-echo "QUBRID_API_KEY=your_actual_key_here" > .env
+# 3. Install dependencies
+uv pip install -e .
 
-# 4. Run the Studio App
+# 4. Set up API key
+cp .env.example .env
+nano .env  # Add your QUBRID_API_KEY
+
+# 5. Run the Studio App
 uv run streamlit run frontend/app.py
 
 ```
