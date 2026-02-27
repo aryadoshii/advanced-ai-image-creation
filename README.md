@@ -1,16 +1,19 @@
-![Advanced AI Studio Banner](frontend/assets/qubrid_banner.png)
+<div align="center">
+
+<img src="frontend/assets/qubrid_banner.png" alt="Advanced AI Studio Banner" width="100%">
 
 # Advanced AI Image Creation Studio 🌌
 
-> A professional-grade, high-fidelity AI image generation platform. Transform complex text prompts into breathtaking visual art, game assets, and photorealistic portraits in seconds.
+A professional-grade, high-fidelity AI image generation platform. Transform complex text prompts into breathtaking visual art, game assets, and photorealistic portraits in seconds.
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.40+-red.svg)](https://streamlit.io/)
 [![Stable Diffusion](https://img.shields.io/badge/Model-SD--3.5-purple.svg)](https://stability.ai/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
----
+</div>
 
+---
 ## ✨ Features
 
 - **💎 Glassmorphism UI** - A premium, modern interface with frosted glass components and deep purple Qubrid-inspired accents.
@@ -119,4 +122,8 @@ uv run streamlit run frontend/app.py
 
 ---
 
-**Made with ❤️ by Qubrid AI**
+<div align="center">
+
+  **Made with ❤️ by Qubrid AI**
+
+</div>
